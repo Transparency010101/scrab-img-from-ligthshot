@@ -1,3 +1,4 @@
 img/*.jpg
 venv/
-idea.txt
+ideas.txt
+__pycache__/
