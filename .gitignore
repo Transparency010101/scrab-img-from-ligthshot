@@ -1,4 +1,5 @@
 img/*.jpg
 venv/
 ideas.txt
-__pycache__/
+core/__pycache__
+.idea/
