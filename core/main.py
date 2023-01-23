@@ -24,11 +24,10 @@ desktop_agents = [
     'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'
 ]
 
-number_of_images = input("How many images to download(default 10): ") or 10
+number_of_images = input("How many images to download(default 1): ") or 1
 
 
 class Main:
-
     header = {
         "User-Agent": None,
         "Accept": "*/*"
@@ -68,11 +67,12 @@ class Main:
 
     def download_img(self):
         get_img = requests.get(self.get_url_of_img(), headers=self.header)
-        img_name = f"../img/test_{self.create_random_name_for_img()}" + ".jpg"
 
-        img_opt = open(img_name, "wb")
+        if get_img.status_code != 404:
+            img_name = f"../img/test_{self.create_random_name_for_img()}" + ".jpg"
 
-        img_opt.write(get_img.content)
+            img_opt = open(img_name, "wb")
+            img_opt.write(get_img.content)
 
 
 if __name__ == "__main__":
