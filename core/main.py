@@ -1,6 +1,7 @@
 import requests
 
 from random import sample, choice
+from os import listdir
 from bs4 import BeautifulSoup
 
 desktop_agents = [
@@ -24,7 +25,7 @@ desktop_agents = [
     'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'
 ]
 
-number_of_images = input("How many images to download(default 1): ") or 1
+number_of_images = int(input("How many images to download(default 1): ")) or 1
 
 
 class Main:
@@ -67,7 +68,6 @@ class Main:
 
     def download_img(self):
         get_img = requests.get(self.get_url_of_img(), headers=self.header)
-
         if get_img.status_code != 404:
             img_name = f"../img/test_{self.create_random_name_for_img()}" + ".jpg"
 
@@ -76,7 +76,8 @@ class Main:
 
 
 if __name__ == "__main__":
-    while True:
+
+    for _ in range(number_of_images):
         try:
             Main().download_img()
         except Exception:
