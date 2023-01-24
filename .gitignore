@@ -2,4 +2,6 @@ img/*.jpg
 venv/
 ideas.txt
 core/__pycache__
+core/test.py
 .idea/
+start_venv.sh

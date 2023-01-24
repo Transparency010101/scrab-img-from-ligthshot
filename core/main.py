@@ -1,7 +1,7 @@
 import requests
+import time
 
 from random import sample, choice
-from os import listdir
 from bs4 import BeautifulSoup
 
 desktop_agents = [
@@ -25,8 +25,6 @@ desktop_agents = [
     'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'
 ]
 
-number_of_images = int(input("How many images to download(default 1): ")) or 1
-
 
 class Main:
     header = {
@@ -34,7 +32,8 @@ class Main:
         "Accept": "*/*"
     }
 
-    def create_random_six_symbols(self):
+    @staticmethod
+    def create_random_six_symbols():
         lower_case = "abcdefghijklmnopqrstuvwxyz"
         numbers = "1234567890"
         use_for = lower_case + numbers
@@ -42,7 +41,8 @@ class Main:
 
         return "".join(sample(use_for, length_for_pass))
 
-    def create_random_name_for_img(self):
+    @staticmethod
+    def create_random_name_for_img():
         lower_case = "abcdefghijklmnopqrstuvwxyz"
         upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         numbers = "1234567890"
@@ -71,14 +71,18 @@ class Main:
         if get_img.status_code != 404:
             img_name = f"../img/test_{self.create_random_name_for_img()}" + ".jpg"
 
-            img_opt = open(img_name, "wb")
-            img_opt.write(get_img.content)
+            with open(img_name, "wb+") as img_opt:
+                img_opt.write(get_img.content)
 
 
 if __name__ == "__main__":
+    number_of_images = int(input("How many images to download(default 1): ")) or 1
 
     for _ in range(number_of_images):
+        start_time = time.time()
         try:
             Main().download_img()
         except Exception:
             continue
+        finally:
+            print(f">>> {time.time() - start_time}")
