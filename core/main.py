@@ -55,34 +55,37 @@ class Main:
     def get_url_of_img(self):
         self.header["User-Agent"] = choice(desktop_agents)
 
-        site_with_img = requests.get(
+        html_code_with_img = requests.get(
             f"https://prnt.sc/image/{self.create_random_six_symbols()}",
             headers=self.header
         ).text
 
-        url_of_img = BeautifulSoup(site_with_img, "lxml").find("img", {
+        url_of_img = BeautifulSoup(html_code_with_img, "lxml").find("img", {
             "id": "screenshot-image"
         }).get("src")
 
         return url_of_img
 
     def download_img(self):
-        get_img = requests.get(self.get_url_of_img(), headers=self.header)
-        if get_img.status_code != 404:
+        request_url_of_img = requests.get(self.get_url_of_img(), headers=self.header)
+        min_amount_of_bytes = 1000
+        if len(request_url_of_img.content) > min_amount_of_bytes:
             img_name = f"../img/test_{self.create_random_name_for_img()}" + ".jpg"
 
             with open(img_name, "wb+") as img_opt:
-                img_opt.write(get_img.content)
+                img_opt.write(request_url_of_img.content)
 
 
 if __name__ == "__main__":
     number_of_images = int(input("How many images to download(default 1): ")) or 1
 
+    start_program_time = time.time()
     for _ in range(number_of_images):
-        start_time = time.time()
+        start_cycle = time.time()
         try:
             Main().download_img()
         except Exception:
             continue
         finally:
-            print(f">>> {time.time() - start_time}")
+            print(f">>> {time.time() - start_cycle}")
+    print(f"All time: {time.time() - start_program_time}")
