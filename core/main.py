@@ -25,11 +25,24 @@ desktop_agents = [
     'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'
 ]
 
+list_of_proxy = [
+    "180.247.131.229:8080",
+    "196.40.124.12:42619",
+    "196.12.154.94:8080",
+    "180.210.206.52:3128",
+    "91.215.176.27:81",
+]
+
 
 class Main:
     header = {
         "User-Agent": None,
         "Accept": "*/*"
+    }
+
+    proxies = {
+        "http": "",
+        "https": ""
     }
 
     @staticmethod
@@ -54,35 +67,57 @@ class Main:
 
     def get_url_of_img(self):
         self.header["User-Agent"] = choice(desktop_agents)
+        self.proxies["http"] = choice(list_of_proxy)
+        self.proxies["https"] = choice(list_of_proxy)
 
-        site_with_img = requests.get(
-            f"https://prnt.sc/image/{self.create_random_six_symbols()}",
-            headers=self.header
-        ).text
+        try:
+            site_with_img = requests.get(
+                f"https://prnt.sc/image/{self.create_random_six_symbols()}",
+                headers=self.header,
+                proxies=self.proxies,
+            ).text
+            print("Proxy yes")
+        except Exception as err:
+            print("Прокси не подключился")
+            print(err)
+        else:
+            url_of_img = BeautifulSoup(site_with_img, "lxml").find("img", {
+                "id": "screenshot-image"
+            }).get("src")
 
-        url_of_img = BeautifulSoup(site_with_img, "lxml").find("img", {
-            "id": "screenshot-image"
-        }).get("src")
+            return url_of_img
 
-        return url_of_img
 
     def download_img(self):
-        get_img = requests.get(self.get_url_of_img(), headers=self.header)
-        if get_img.status_code != 404:
-            img_name = f"../img/test_{self.create_random_name_for_img()}" + ".jpg"
+        try:
+            get_img = requests.get(
+                self.get_url_of_img(),
+                headers=self.header,
+                proxies=self.proxies,
+            )
+        except Exception as err:
+            print("Прокси не подключился")
+            print(err)
+        else:
+            if get_img.status_code != 404:
+                img_name = f"../img/test_{self.create_random_name_for_img()}" + ".jpg"
+                with open(img_name, "wb+") as img_opt:
+                    img_opt.write(get_img.content)
 
-            with open(img_name, "wb+") as img_opt:
-                img_opt.write(get_img.content)
+
+def main():
+    for _ in range(number_of_images):
+        try:
+            Main().download_img()
+        except Exception:
+            # Когда код будешь дебажить включи это
+            # print(Exception)
+            continue
 
 
 if __name__ == "__main__":
     number_of_images = int(input("How many images to download(default 1): ")) or 1
 
-    for _ in range(number_of_images):
-        start_time = time.time()
-        try:
-            Main().download_img()
-        except Exception:
-            continue
-        finally:
-            print(f">>> {time.time() - start_time}")
+    start_time = time.time()
+    main()
+    print(f">>> {time.time() - start_time}")
