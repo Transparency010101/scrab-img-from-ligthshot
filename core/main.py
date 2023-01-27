@@ -77,10 +77,13 @@ class Main:
 
 
 def is_folder_img_exist():
-    if not os.path.exists("img/dist"):
+    if not os.path.exists("../img/"):
         os.makedirs(
-            os.path.dirname("img/")
+            os.path.dirname("../img/")
         )
+    else:
+        pass
+
 
 def loop():
     start_program_time = time.time()
