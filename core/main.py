@@ -1,13 +1,12 @@
 import requests
 import time
+import multiprocessing
 
 from random import sample, choice
 from bs4 import BeautifulSoup
 
 desktop_agents = [
-    # Tor Browser for Windows and Linux
     'Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0',
-    # Tor Browser for Android
     'Mozilla/5.0 (Android 10; Mobile; rv:91.0) Gecko/91.0 Firefox/91.0',
     'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36',
     'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36',
@@ -76,16 +75,19 @@ class Main:
                 img_opt.write(request_url_of_img.content)
 
 
-if __name__ == "__main__":
-    number_of_images = int(input("How many images to download(default 1): ")) or 1
-
+def loop():
     start_program_time = time.time()
-    for _ in range(number_of_images):
-        start_cycle = time.time()
+    for _ in range(int(count_of_images)):
         try:
             Main().download_img()
         except Exception:
             continue
-        finally:
-            print(f">>> {time.time() - start_cycle}")
-    print(f"All time: {time.time() - start_program_time}")
+    print(f"All time: {int(time.time() - start_program_time)}")
+
+
+if __name__ == "__main__":
+    count_of_images = input("How many images to download: ") or 1
+    count_of_process = input("How many process(default 1): ") or 1
+
+    for _ in range(int(count_of_process)):
+        multiprocessing.Process(target=loop).start()
