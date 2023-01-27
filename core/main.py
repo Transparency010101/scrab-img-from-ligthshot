@@ -76,7 +76,7 @@ class Main:
                 img_opt.write(request_url_of_img.content)
 
 
-def is_folder_img_exist():
+def create_img_folder_if_not_exist():
     if not os.path.exists("../img/"):
         os.makedirs(
             os.path.dirname("../img/")
@@ -99,7 +99,7 @@ if __name__ == "__main__":
     count_of_images = input("How many images to download: ") or 1
     count_of_process = input("How many process(default 1): ") or 1
 
-    is_folder_img_exist()
+    create_img_folder_if_not_exist()
 
     for _ in range(int(count_of_process)):
         multiprocessing.Process(target=loop).start()
