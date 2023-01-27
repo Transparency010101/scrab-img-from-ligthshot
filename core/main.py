@@ -1,6 +1,7 @@
 import requests
 import time
 import multiprocessing
+import os
 
 from random import sample, choice
 from bs4 import BeautifulSoup
@@ -69,11 +70,17 @@ class Main:
         request_url_of_img = requests.get(self.get_url_of_img(), headers=self.header)
         min_amount_of_bytes = 1000
         if len(request_url_of_img.content) > min_amount_of_bytes:
-            img_name = f"../img/dist/test_{self.create_random_name_for_img()}" + ".jpg"
+            img_name = f"../img/test_{self.create_random_name_for_img()}" + ".jpg"
 
             with open(img_name, "wb+") as img_opt:
                 img_opt.write(request_url_of_img.content)
 
+
+def is_folder_img_exist():
+    if not os.path.exists("img/dist"):
+        os.makedirs(
+            os.path.dirname("img/")
+        )
 
 def loop():
     start_program_time = time.time()
@@ -88,6 +95,8 @@ def loop():
 if __name__ == "__main__":
     count_of_images = input("How many images to download: ") or 1
     count_of_process = input("How many process(default 1): ") or 1
+
+    is_folder_img_exist()
 
     for _ in range(int(count_of_process)):
         multiprocessing.Process(target=loop).start()
