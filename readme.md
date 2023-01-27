@@ -6,7 +6,10 @@ You can some change lasts symbols, and you'll see another image(https://prnt.sc/
 To automatic this process I created this project on python.
 
 # How to use
-First, you have to install python3. Create virtual venv in this project, then launch this command in terminal: `pip install -r requments.txt`
+First, you have to install python3. Create virtual venv in this project and launch venv: <br>
+**Linux**: `source venv/bin/activate` <br>
+**Windows** `venv/Scripts/activate` <br>
+then launch this command in terminal: `pip install -r requments.txt`
 After installation launch this command: `python core/main.py`
 
 First input - it's approximately count of images, which will download, why approximately? Well my program work so. <br>
