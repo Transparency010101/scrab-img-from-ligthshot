@@ -1,7 +1,7 @@
 import requests
 import time
-import multiprocessing
 import os
+import multiprocessing
 
 from random import sample, choice
 from bs4 import BeautifulSoup
