@@ -1,3 +1,4 @@
+#!/home/manajromem2/Klondike/Python/#project/scrab_lightshot/venv/bin/python3
 import requests
 import time
 import os
@@ -70,16 +71,16 @@ class Main:
         request_url_of_img = requests.get(self.get_url_of_img(), headers=self.header)
         min_amount_of_bytes = 1000
         if len(request_url_of_img.content) > min_amount_of_bytes:
-            img_name = f"../img/test_{self.create_random_name_for_img()}" + ".jpg"
+            img_name = f"img/test_{self.create_random_name_for_img()}" + ".jpg"
 
-            with open(img_name, "wb+") as img_opt:
+            with open(img_name, "wb") as img_opt:
                 img_opt.write(request_url_of_img.content)
 
 
 def create_img_folder_if_not_exist():
-    if not os.path.exists("../img/"):
+    if not os.path.exists("img/"):
         os.makedirs(
-            os.path.dirname("../img/")
+            os.path.dirname("img/")
         )
     else:
         pass

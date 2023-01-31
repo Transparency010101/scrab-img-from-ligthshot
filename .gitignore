@@ -5,3 +5,4 @@ core/__pycache__
 core/test.py
 .idea/
 .ideas.txt.kate-swp
+subprocess
