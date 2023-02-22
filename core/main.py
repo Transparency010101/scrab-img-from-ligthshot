@@ -1,4 +1,3 @@
-#!/home/manajromem2/Klondike/Python/#project/scrab_lightshot/venv/bin/python3
 import requests
 import time
 import os
@@ -6,6 +5,8 @@ import multiprocessing
 
 from random import sample, choice
 from bs4 import BeautifulSoup
+
+from config import debug_mod
 
 desktop_agents = [
     'Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0',
@@ -91,8 +92,10 @@ def loop():
     for _ in range(int(count_of_images)):
         try:
             Main().download_img()
-        except Exception:
-            continue
+        except Exception as err:
+            if debug_mod:
+                print(err)
+            pass
     print(f"All time: {int(time.time() - start_program_time)}")
 
 
