@@ -1,12 +1,17 @@
-import requests
-import time
 import os
 import multiprocessing
+import asyncio
+import httpx as htx
 
 from random import sample, choice
 from bs4 import BeautifulSoup
+from time import time
 
-from config import debug_mod
+from config import (
+    debug_mod,
+    default_count_of_process,
+    default_count_of_image
+)
 
 desktop_agents = [
     'Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0',
@@ -28,54 +33,69 @@ desktop_agents = [
 ]
 
 
-class Main:
+def create_random_url_path():
+    lower_case = "abcdefghijklmnopqrstuvwxyz"
+    numbers = "1234567890"
+    use_for = lower_case + numbers
+    length_for_pass = 6
+
+    return "".join(sample(use_for, length_for_pass))
+
+
+def create_random_name_for_img():
+    lower_case = "abcdefghijklmnopqrstuvwxyz"
+    upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    numbers = "1234567890"
+    length_for_pass = 10
+
+    use_for = lower_case + upper_case + numbers
+
+    return "".join(sample(use_for, length_for_pass))
+
+
+def fake_user_agent():
     header = {
-        "User-Agent": None,
+        "User-Agent": choice(desktop_agents),
         "Accept": "*/*"
     }
 
-    @staticmethod
-    def create_random_six_symbols():
-        lower_case = "abcdefghijklmnopqrstuvwxyz"
-        numbers = "1234567890"
-        use_for = lower_case + numbers
-        length_for_pass = 6
+    return header
 
-        return "".join(sample(use_for, length_for_pass))
 
-    @staticmethod
-    def create_random_name_for_img():
-        lower_case = "abcdefghijklmnopqrstuvwxyz"
-        upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        numbers = "1234567890"
-        length_for_pass = 10
+async def get_url_of_img(params):
+    async with htx.AsyncClient() as response:
+        html_code_with_img = await response.get(
+            f"https://prnt.sc/image/{create_random_url_path()}",
+            params=params
+        )
 
-        use_for = lower_case + upper_case + numbers
+        if html_code_with_img.status_code == 200:
+            url_of_img = BeautifulSoup(html_code_with_img, "lxml").find("img", {
+                "id": "screenshot-image"
+            }).get("src")
 
-        return "".join(sample(use_for, length_for_pass))
+            return url_of_img
+        else:
+            print("Ебаный рот, этого казино, блять!(get_url_of_img)")
 
-    def get_url_of_img(self):
-        self.header["User-Agent"] = choice(desktop_agents)
 
-        html_code_with_img = requests.get(
-            f"https://prnt.sc/image/{self.create_random_six_symbols()}",
-            headers=self.header
-        ).text
+async def download_img(url_of_img, params):
+    async with htx.AsyncClient() as response:
+        request_url_of_img = await response.get(url_of_img, params=params)
 
-        url_of_img = BeautifulSoup(html_code_with_img, "lxml").find("img", {
-            "id": "screenshot-image"
-        }).get("src")
-
-        return url_of_img
-
-    def download_img(self):
-        request_url_of_img = requests.get(self.get_url_of_img(), headers=self.header)
         min_amount_of_bytes = 1000
         if len(request_url_of_img.content) > min_amount_of_bytes:
-            img_name = f"img/test_{self.create_random_name_for_img()}" + ".jpg"
+            img_name = f"img/test_{create_random_name_for_img()}" + ".jpg"
 
             with open(img_name, "wb") as img_opt:
                 img_opt.write(request_url_of_img.content)
+
+
+async def main():
+    await download_img(
+        await get_url_of_img(fake_user_agent()),
+        fake_user_agent()
+    )
 
 
 def create_img_folder_if_not_exist():
@@ -83,27 +103,29 @@ def create_img_folder_if_not_exist():
         os.makedirs(
             os.path.dirname("img/")
         )
-    else:
-        pass
+    pass
 
 
 def loop():
-    start_program_time = time.time()
     for _ in range(int(count_of_images)):
         try:
-            Main().download_img()
+            asyncio.run(main())
         except Exception as err:
             if debug_mod:
                 print(err)
             pass
-    print(f"All time: {int(time.time() - start_program_time)}")
 
 
 if __name__ == "__main__":
-    count_of_images = input("How many images to download: ") or 1
-    count_of_process = input("How many process(default 1): ") or 1
+    count_of_images = input("How many images to download: ") or int(default_count_of_image)
 
     create_img_folder_if_not_exist()
 
-    for _ in range(int(count_of_process)):
-        multiprocessing.Process(target=loop).start()
+    if debug_mod:
+        start_program_time = time()
+        loop()
+        print(f"All time: {int(time() - start_program_time)}")
+    else:
+        count_of_process = input("How many process: ") or int(default_count_of_process)
+        for _ in range(int(count_of_process)):
+            multiprocessing.Process(target=loop).start()
