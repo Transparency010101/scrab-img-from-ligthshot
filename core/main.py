@@ -1,5 +1,4 @@
 import os
-import multiprocessing
 import asyncio
 import httpx as htx
 
@@ -9,7 +8,6 @@ from time import time
 
 from config import (
     debug_mod,
-    default_count_of_process,
     default_count_of_image
 )
 
@@ -75,8 +73,6 @@ async def get_url_of_img(params):
             }).get("src")
 
             return url_of_img
-        else:
-            print("Ебаный рот, этого казино, блять!(get_url_of_img)")
 
 
 async def download_img(url_of_img, params):
@@ -91,13 +87,6 @@ async def download_img(url_of_img, params):
                 img_opt.write(request_url_of_img.content)
 
 
-async def main():
-    await download_img(
-        await get_url_of_img(fake_user_agent()),
-        fake_user_agent()
-    )
-
-
 def create_img_folder_if_not_exist():
     if not os.path.exists("img/"):
         os.makedirs(
@@ -106,14 +95,29 @@ def create_img_folder_if_not_exist():
     pass
 
 
-def loop():
+async def download_one_img():
+    await download_img(
+        await get_url_of_img(fake_user_agent()),
+        fake_user_agent()
+    )
+
+
+async def loop():
+    queue = asyncio.Queue()
+    task_list = []
+
     for _ in range(int(count_of_images)):
         try:
-            asyncio.run(main())
+            for i in range(int(count_of_images)):
+                task = asyncio.create_task(download_one_img())
+                task_list.append(task)
         except Exception as err:
             if debug_mod:
                 print(err)
             pass
+
+    await queue.join()
+    await asyncio.gather(*task_list, return_exceptions=debug_mod)
 
 
 if __name__ == "__main__":
@@ -121,11 +125,6 @@ if __name__ == "__main__":
 
     create_img_folder_if_not_exist()
 
-    if debug_mod:
-        start_program_time = time()
-        loop()
-        print(f"All time: {int(time() - start_program_time)}")
-    else:
-        count_of_process = input("How many process: ") or int(default_count_of_process)
-        for _ in range(int(count_of_process)):
-            multiprocessing.Process(target=loop).start()
+    start_program_time = time()
+    asyncio.run(loop())
+    print(f"All time: {int(time() - start_program_time)}")
