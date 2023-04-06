@@ -1,12 +1,12 @@
 import requests
 import time
 import os
-import multiprocessing
+import string
 
 from random import sample, choice
 from bs4 import BeautifulSoup
 
-from config import debug_mod
+debug_mod = False
 
 desktop_agents = [
     'Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0',
@@ -36,23 +36,23 @@ class Main:
 
     @staticmethod
     def create_random_six_symbols():
-        lower_case = "abcdefghijklmnopqrstuvwxyz"
-        numbers = "1234567890"
+        lower_case = string.ascii_lowercase
+        numbers = string.digits
         use_for = lower_case + numbers
-        length_for_pass = 6
+        length = 6
 
-        return "".join(sample(use_for, length_for_pass))
+        return "".join(sample(use_for, length))
 
     @staticmethod
     def create_random_name_for_img():
-        lower_case = "abcdefghijklmnopqrstuvwxyz"
-        upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        numbers = "1234567890"
-        length_for_pass = 10
+        lower_case = string.ascii_lowercase
+        upper_case = string.ascii_uppercase
+        numbers = string.digits
+        length = 10
 
         use_for = lower_case + upper_case + numbers
 
-        return "".join(sample(use_for, length_for_pass))
+        return "".join(sample(use_for, length))
 
     def get_url_of_img(self):
         self.header["User-Agent"] = choice(desktop_agents)
@@ -80,16 +80,18 @@ class Main:
 
 def create_img_folder_if_not_exist():
     if not os.path.exists("img/"):
-        os.makedirs(
-            os.path.dirname("img/")
-        )
-    else:
-        pass
+        os.makedirs(os.path.dirname("img/"))
 
 
-def loop():
+def delete_images():
+    for folder, _, files in os.walk("img/"):
+        for file in files:
+            os.remove(folder + file)
+
+
+def loop(items: int):
     start_program_time = time.time()
-    for _ in range(int(count_of_images)):
+    while items != len(os.listdir("img/")):
         try:
             Main().download_img()
         except Exception as err:
@@ -100,10 +102,9 @@ def loop():
 
 
 if __name__ == "__main__":
-    count_of_images = input("How many images to download: ") or 1
-    count_of_process = input("How many process(default 1): ") or 1
+    delete_images()
+
+    count_of_images = int(input("How many images to download: ")) or 1
 
     create_img_folder_if_not_exist()
-
-    for _ in range(int(count_of_process)):
-        multiprocessing.Process(target=loop).start()
+    loop(count_of_images)
