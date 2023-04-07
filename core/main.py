@@ -5,7 +5,9 @@ from core import ScrabImgFromLightShot
 
 
 def create_img_folder_if_not_exist():
-    """Если не будет существовать папка img/ будет выдавать ошибку"""
+    """
+    Если не будет существовать папка img/ будет выдавать ошибку
+    """
     if not os.path.exists("img/"):
         os.makedirs(os.path.dirname("img/"))
 
@@ -16,10 +18,11 @@ def delete_images():
             os.remove(folder + file)
 
 
-def loop(items: int, debug_mod: bool = True):
+def loop(items: int, debug_mod=False):
     """
-    При выполнение кода иногда возникают ошибки связаые с отсутствием ссылки,
-    и что бы программа не останавливалась оно обернуто в try catch
+    При выполнении кода иногда возникают ошибки связаные с отсутствием ссылки, или ее не получилось достать,
+    и что бы программа не останавливалась - бесконечный цыкл обернутый в try catch, который вбирает все исключения,
+    и их игнорирует. Но есть нюанс, что ошибки не показываются из-за try catch, поэтому есть debug_mod
     """
     start_program_time = time.time()
     while items != len(os.listdir("img/")):
@@ -35,7 +38,7 @@ def loop(items: int, debug_mod: bool = True):
 if __name__ == "__main__":
     delete_images()
 
-    count_of_images = int(input("How many images to download(default=5): ")) or 5
+    count_of_images = input("How many images to download(default=5): ") or 5
 
     create_img_folder_if_not_exist()
-    loop(count_of_images)
+    loop(int(count_of_images))

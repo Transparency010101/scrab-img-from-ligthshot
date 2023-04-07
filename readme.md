@@ -14,6 +14,6 @@ After installation launch this command: `python core/main.py`
 
 First input - it's approximately count of images, which would to download, why approximately? Well my program work so. <br>
 
-When program finished, open in the project folder img, and there will be images.
+When program finished, open in the project's folder **scrab-img-from-lightshot/img/**, and there will be images.
 
-P.S Не бейте за англишь и/или русский.
+P.S. Не бейте за англишь и/или русский.
