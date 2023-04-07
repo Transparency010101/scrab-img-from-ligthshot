@@ -26,31 +26,40 @@ class ScrabImgFromLightShot:
         lower_case = string.ascii_lowercase
         upper_case = string.ascii_uppercase
         numbers = string.digits
-        length = 10
+        length = 8
 
         use_for = lower_case + upper_case + numbers
 
         return "".join(random.sample(use_for, length))
 
-    def get_url_of_img(self):
-        self.header["User-Agent"] = UserAgent().random
+    @classmethod
+    def get_url_of_img(cls):
+        cls.header["User-Agent"] = UserAgent().random
 
-        html_code_with_img = requests.get(
-            f"https://prnt.sc/image/{self.create_random_six_symbols()}",
-            headers=self.header
+        html_code = requests.get(
+            f"https://prnt.sc/image/{cls.create_random_six_symbols()}",
+            headers=cls.header
         ).text
 
-        url_of_img = BeautifulSoup(html_code_with_img, "lxml").find("img", {
+        url_of_img = BeautifulSoup(html_code, "lxml").find("img", {
             "id": "screenshot-image"
         }).get("src")
 
         return url_of_img
 
-    def download_img(self):
-        request_url_of_img = requests.get(self.get_url_of_img(), headers=self.header)
+    @staticmethod
+    def is_img_broken(img):
+        """
+        Broken images have not size more 1000 bytes
+        """
         min_amount_of_bytes = 1000
-        if len(request_url_of_img.content) > min_amount_of_bytes:
-            img_name = f"img/test_{self.create_random_name_for_img()}" + ".jpg"
+        return len(img.content) > min_amount_of_bytes
+
+    @classmethod
+    def download_img(cls):
+        request_url_of_img = requests.get(cls.get_url_of_img(), headers=cls.header)
+        if cls.is_img_broken(request_url_of_img):
+            img_name = f"img/test_{cls.create_random_name_for_img()}" + ".jpg"
 
             with open(img_name, "wb") as img_opt:
                 img_opt.write(request_url_of_img.content)
