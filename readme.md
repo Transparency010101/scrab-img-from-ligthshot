@@ -1,21 +1,50 @@
-# Scrab Img From LightShot
+<div align="center">
+    <img src="https://img.shields.io/pypi/pyversions/requests" alt="python-versions">
+</div>
 
-# What is it
-if you open this link https://prnt.sc/image/4fdgjb, you can see an images of someone user.
-You can change lasts 6 symbols, and you'll see another image(https://prnt.sc/image/afsghb), but it is uncomfortable.
-To automatic this process I created this project.
+# Scrab Img(images) From LightShot
 
-# How to use
-First, you have to install python3. Create virtual venv in this project and launch venv: <br>
-**Linux**: `source venv/bin/activate` <br>
-**Windows** `venv/Scripts/activate` <br>
-Then launch a command in terminal: `pip install -r requirements.txt`
-After installation launch the command: `python core/main.py`
+## What Is It?
+If you open this link https://prnt.sc/image/4fdgjb, you can see an image of someone user of lightshot.
+You can change lasts 6 symbols in the link, and you'll see another image: https://prnt.sc/image/afsghb,
+but to changing it is uncomfortable. To automatic this uncomfortable actions, I created this project.
 
-First input - it's approximately count of images, which would to download, why approximately? Well my program work so. <br>
+Script will download certain count of images on you machine(PC, notebook)
+___
 
-When program finished, open in the project's folder **scrab-img-from-lightshot/img/**, and there will be images.
+## Downloading and Installing
+You have to have installed python 3.7 or higher. 
 
-P.S. Не бейте за англишь и/или русский.
+Create virtual environment: 
+```
+python -m venv venv 
+```
+If didn't work:
+```
+python3 -m venv venv 
+```
 
-Thanks, Black Triangle for [the idea](https://www.youtube.com/watch?v=OUki27mlwOw) 4:30.
+Then activate(launch) virtual environmen: 
+- **Linux**: `source venv/bin/activate`
+- **Windows**: `venv/Scripts/activate`
+
+Then launch this command in the ***root***(scrab-img-from-lightshot/) project's folder:
+```
+pip install -r requirements.txt
+```
+That command will install needed libraries.
+
+
+## Usage
+To launch program: 
+```
+python core/main.py
+```
+
+You'll see a prompt: input there a count of images which you want to download.
+When program finished, open the project's folder `scrab-img-from-lightshot/img/`, and there will be images.
+
+## Notes
+Idea for the project I got [there](https://www.youtube.com/watch?v=OUki27mlwOw) 4:30.
+
+P.S. Не бейте за англиский.
