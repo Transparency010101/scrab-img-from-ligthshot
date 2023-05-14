@@ -12,7 +12,22 @@ but to changing it is uncomfortable. To automatic this uncomfortable actions, I 
 Script will download certain count of images on you machine(PC, notebook)
 ___
 
-## Downloading and Installing
+## Installing
+
+### With Poetry
+You have to have installed poetry 1.4 or higher.
+
+Install packages:
+```
+poetry install
+```
+
+Activate virtual environment:
+```
+poetry shell
+```
+
+### With Virtual Environment
 You have to have installed python 3.7 or higher. 
 
 Create virtual environment: 
