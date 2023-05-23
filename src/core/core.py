@@ -32,11 +32,19 @@ class ScrabImgFromLightShot:
 
         return "".join(random.sample(use_for, length))
 
+    @staticmethod
+    def is_img_broken(img):
+        """
+        Sometimes get broken images, they have not size more 1000 bytes.
+        """
+        min_amount_of_bytes = 1000
+        return len(img.content) > min_amount_of_bytes
+
     @classmethod
     def get_url_of_img(cls):
         """
         Get a link on a html page. Parse <img/> with the id of the 'screenshot-image',
-        and get the link to img and then return it.
+        and get the url to img and then return it.
         """
         cls.header["User-Agent"] = UserAgent().random
 
@@ -50,14 +58,6 @@ class ScrabImgFromLightShot:
         }).get("src")
 
         return url_of_img
-
-    @staticmethod
-    def is_img_broken(img):
-        """
-        Sometimes get broken images, they have not size more 1000 bytes.
-        """
-        min_amount_of_bytes = 1000
-        return len(img.content) > min_amount_of_bytes
 
     @classmethod
     def download_img(cls):
