@@ -1,3 +1,18 @@
+# Copyright 2023 Transparency010101
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 import time
 import os
 
@@ -11,7 +26,7 @@ def main(count_items: int, debug_mod=False):
     could not be obtained, and so that the program does not stop - an endless loop
     wrapped in try/catch, which absorbs all exceptions, and ignores them.
     But there is a nuance that errors are not shown due to try/catch, so there is
-    debug_mod in function 'loop'
+    debug_mod in function 'main'
     """
     start_program_time = time.time()
     while count_items != len(os.listdir("img/")):

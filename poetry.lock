@@ -117,21 +117,6 @@ files = [
 ]
 
 [[package]]
-name = "etc"
-version = "0.0.7"
-description = "An etcd Python client library"
-category = "main"
-optional = false
-python-versions = "*"
-files = [
-    {file = "etc-0.0.7.tar.gz", hash = "sha256:7c1ce5bd1269548e5ffeaef3c10e48ca49c126daf229faa023361e3df15321ed"},
-]
-
-[package.dependencies]
-iso8601 = "*"
-requests = ">=2.8.0"
-
-[[package]]
 name = "fake-useragent"
 version = "1.1.3"
 description = "Up-to-date simple useragent faker with real world database"
@@ -153,18 +138,6 @@ python-versions = ">=3.5"
 files = [
     {file = "idna-3.4-py3-none-any.whl", hash = "sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2"},
     {file = "idna-3.4.tar.gz", hash = "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"},
-]
-
-[[package]]
-name = "iso8601"
-version = "1.1.0"
-description = "Simple module to parse ISO 8601 dates"
-category = "main"
-optional = false
-python-versions = ">=3.6.2,<4.0"
-files = [
-    {file = "iso8601-1.1.0-py3-none-any.whl", hash = "sha256:8400e90141bf792bce2634df533dc57e3bee19ea120a87bebcd3da89a58ad73f"},
-    {file = "iso8601-1.1.0.tar.gz", hash = "sha256:32811e7b81deee2063ea6d2e94f8819a86d1f3811e49d23623a41fa832bef03f"},
 ]
 
 [[package]]
@@ -262,14 +235,14 @@ source = ["Cython (>=0.29.7)"]
 
 [[package]]
 name = "requests"
-version = "2.30.0"
+version = "2.31.0"
 description = "Python HTTP for Humans."
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "requests-2.30.0-py3-none-any.whl", hash = "sha256:10e94cc4f3121ee6da529d358cdaeaff2f1c409cd377dbc72b825852f2f7e294"},
-    {file = "requests-2.30.0.tar.gz", hash = "sha256:239d7d4458afcb28a692cdd298d87542235f4ca8d36d03a15bfc128a6559a2f4"},
+    {file = "requests-2.31.0-py3-none-any.whl", hash = "sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f"},
+    {file = "requests-2.31.0.tar.gz", hash = "sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1"},
 ]
 
 [package.dependencies]
@@ -315,4 +288,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "9ea9336a4e5977776c90f3fd7b2537d6344ea9a61184ff256f4b2bf7b6ce50f3"
+content-hash = "9298e5920696149e33f08455f4cbe284146f0b860add867cf9291bf102ea8305"
