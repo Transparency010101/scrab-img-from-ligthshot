@@ -15,6 +15,9 @@ Licence:
     See the License for the specific language governing permissions and
     limitations under the License.
 
+Foreword:
+    I trying to observe standard code writing on python(PEP8)
+
 Classes:
     ScrabImgFromLightShot
 """
@@ -75,12 +78,18 @@ class ScrabImgFromLightShot:
 
     @staticmethod
     def is_img_broken(img):
-        """Check is img broken
+        """Check is image broken
 
         Broken images have not size more 1000 bytes.
+
+        Arguments:
+            img (bytes): it's literally image in bytes
+
+        Return:
+            bool
         """
         min_amount_of_bytes = 1000
-        return len(img.content) > min_amount_of_bytes
+        return len(img) > min_amount_of_bytes
 
     @classmethod
     def get_url_of_img(cls):
@@ -110,7 +119,7 @@ class ScrabImgFromLightShot:
         """Download images and put them in folder img/"""
         request_url_of_img = requests.get(cls.get_url_of_img(),
                                           headers=cls.header)
-        if cls.is_img_broken(request_url_of_img):
+        if cls.is_img_broken(request_url_of_img.content):
             img_name = f"img/test_{cls.create_random_name_for_img()}" + ".jpg"
 
             with open(img_name, "wb") as img:

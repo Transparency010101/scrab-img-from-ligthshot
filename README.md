@@ -7,9 +7,9 @@
 ## What Is It?
 If you open this link https://prnt.sc/image/4fdgjb, you can see an image of someone user of lightshot.
 You can change lasts 6 symbols in the link, and you'll see another image: https://prnt.sc/image/afsghb,
-but to changing it is uncomfortable. To automatic this uncomfortable actions, I created this project.
+but changing it manually is uncomfortable. To automatic this uncomfortable process, I created this project.
 
-Script will download certain count of images on you machine(PC, notebook)
+Script will download certain count(that you indicate) of images
 ___
 
 ## Installing
@@ -27,7 +27,7 @@ Activate virtual environment:
 poetry shell
 ```
 
-### With Virtual Environment
+### With Pip
 You have to have installed python 3.7 or higher. 
 
 Create virtual environment: 
@@ -54,6 +54,15 @@ That command will install needed libraries.
 To launch program: 
 ```
 python core/main.py
+```
+or
+```
+pyton3 core/main.py
+```
+
+Poetry:
+```
+poetry run python core/main.py
 ```
 
 You'll see a prompt: input there a count of images which you want to download.

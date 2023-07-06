@@ -1,7 +1,6 @@
 img/*.*
 venv/
 src/__pycache__
-src/core/__pycache__
 .idea/
 .ideas.txt.kate-swp
 subprocess
