@@ -89,7 +89,7 @@ class ScrabImgFromLightShot:
             bool
         """
         min_amount_of_bytes = 1000
-        return len(img) > min_amount_of_bytes
+        return len(img) < min_amount_of_bytes
 
     @classmethod
     def get_url_of_img(cls):
@@ -119,7 +119,11 @@ class ScrabImgFromLightShot:
         """Download images and put them in folder img/"""
         request_url_of_img = requests.get(cls.get_url_of_img(),
                                           headers=cls.header)
-        if cls.is_img_broken(request_url_of_img.content):
+        # Is image broken - True, then i shouldn't admit it.
+        # Is image broken - False, so i should to admit it,
+        # but "if" statement will not execute, because value isn't True,
+        # so it toggled from False to True by operator "not"
+        if not (cls.is_img_broken(request_url_of_img.content)):
             img_name = f"img/test_{cls.create_random_name_for_img()}" + ".jpg"
 
             with open(img_name, "wb") as img:
