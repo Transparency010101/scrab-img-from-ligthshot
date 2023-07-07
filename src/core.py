@@ -62,7 +62,7 @@ class ScrabImgFromLightShot:
 
     @staticmethod
     def create_random_name_for_img():
-        """Create random name for images for downloaded image
+        """Create random name for downloaded image
         
         Returns:
             string

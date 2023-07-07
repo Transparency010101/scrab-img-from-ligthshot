@@ -41,7 +41,6 @@ python3 -m venv venv
 
 Then activate(launch) virtual environmen: 
 - **Linux**: `source venv/bin/activate`
-- **Windows**: `venv/Scripts/activate`
 
 Then launch this command in the ***root***(scrab-img-from-lightshot/) project's folder:
 ```
