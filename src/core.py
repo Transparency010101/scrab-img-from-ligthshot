@@ -119,8 +119,8 @@ class ScrabImgFromLightShot:
         """Download images and put them in folder img/"""
         request_url_of_img = requests.get(cls.get_url_of_img(),
                                           headers=cls.header)
-        # Is image broken - True, then i shouldn't admit it.
-        # Is image broken - False, so i should to admit it,
+        # Is image broken - True, then I shouldn't admit it.
+        # Is image broken - False, so I should to admit it,
         # but "if" statement will not execute, because value isn't True,
         # so it toggled from False to True by operator "not"
         if not (cls.is_img_broken(request_url_of_img.content)):

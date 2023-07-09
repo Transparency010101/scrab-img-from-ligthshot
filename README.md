@@ -1,6 +1,9 @@
-<div align="center">
-    <img src="https://img.shields.io/pypi/pyversions/requests" alt="python-versions">
-</div>
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/poetry)
+![Static Badge](https://img.shields.io/badge/poetry-1.4%2B-green)
+![Static Badge](https://img.shields.io/badge/only_linux_support-green)
+![Static Badge](https://img.shields.io/badge/pass_tests-none-red)
+![GitHub issues](https://img.shields.io/github/issues-raw/Transparency010101/scrab-img-from-ligthshot)
+
 
 # Scrab Img(images) From LightShot
 
