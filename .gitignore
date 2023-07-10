@@ -1,6 +1,8 @@
-img/*.*
+img/*.jpg
 venv/
-src/__pycache__
 .idea/
-.ideas.txt.kate-swp
+src/__pycache__
+# I don't know what it is
 subprocess
+# File with my minds about this prject
+info.txt
