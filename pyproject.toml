@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "scrab-img-from-ligthshot"
-# I want to get app verstio from there(tolm file) and insert it in badge(shield) in REAMDE FIle
+# I want to get app verstio from there(toml file) and insert it in badge(shield) in REAMDE FIle.
+# May need to do it with CI/CD?
 version = "2.0.5"
 description = "scrab images from ligthshot (i don't know is this legal)"
 authors = ["ossys <ossys1010110@gmail.com>"]
