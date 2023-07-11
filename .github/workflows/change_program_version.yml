@@ -1,0 +1,7 @@
+name: Change Program Version
+on: [push]
+jobs:
+  Do-it:
+    runs-on: ubuntu-latest
+    steps:
+      - run: python3 .readme/dynamic_badge.py
