@@ -2,5 +2,5 @@ img/*.*
 venv/
 src/__pycache__
 .idea/
-.ideas.txt.kate-swp
+info.txt
 subprocess
