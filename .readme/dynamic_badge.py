@@ -1,4 +1,4 @@
-""" Automatic change version in README file's shield
+"""Automatic change version in README file's shield.
 
 This is module with some function for is not relation to project. README file has a shield that show
 project version, when makes push to repository I'd like this version change automatic in shield(I have to
@@ -28,7 +28,7 @@ def get_project_version():
 
 
 def insert_version_to_json_file(version):
-    """ Gets version and insert it in project_version.json
+    """Gets version and insert it in project_version.json
 
     Returns:
         None
