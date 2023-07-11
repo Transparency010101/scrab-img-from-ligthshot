@@ -3,7 +3,7 @@
 ![Static Badge](https://img.shields.io/badge/only_linux_support-green)
 ![Static Badge](https://img.shields.io/badge/pass_tests-none-red)
 ![GitHub issues](https://img.shields.io/github/issues-raw/Transparency010101/scrab-img-from-ligthshot)
-![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fgithub.com%2FTransparency010101%2Fscrab-img-from-ligthshot%2Fblob%2Fdynamic-badges%2Fproject_version.json)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FTransparency010101%2Fscrab-img-from-ligthshot%2Fdynamic-badges%2Fproject_version.json&query=%24.version&label=actual%20version)
 
 
 # Scrab Img(images) From LightShot

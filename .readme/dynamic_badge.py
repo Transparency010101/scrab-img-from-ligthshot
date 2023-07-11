@@ -34,10 +34,7 @@ def insert_version_to_json_file(version):
         None
     """
     data = {
-        "schemaVersion": 1,
-        "label": "actual project version",
-        "message": version,
-        "color": "green"
+        "version": version,
     }
 
     with open("project_version.json", "w") as file:
