@@ -26,11 +26,9 @@ Usage:
 
 Functions:
     create_img_folder_if_not_exist()
-    do_delete_all_images
+    delete_all_images
     main
 """
-
-# 2023-07-11 01:22 pm this project doesn't work
 
 import time
 import os
@@ -52,7 +50,7 @@ def create_img_folder_if_not_exist():
         os.makedirs(os.path.dirname("img/"))
 
 
-def do_delete_all_images(choise="-y"):
+def delete_all_images(choise="-y"):
     """Delete all images from folder img/
 
     It did it for convince, to don't delete it manually. There are 2 choices to
@@ -110,10 +108,10 @@ if __name__ == "__main__":
         # I don't know to do it right, so if you clearly didn't indicate
         # it(in console) will be an IndexError, and then func will work with
         # argument by default(-y).
-        do_delete_all_images(arguments_of_command_line[2])
+        delete_all_images(arguments_of_command_line[2])
         main(int(int(arguments_of_command_line[1])))
     except IndexError:
-        do_delete_all_images()
+        delete_all_images()
     finally:
         main(int(int(arguments_of_command_line[1])))
 
