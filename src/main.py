@@ -19,13 +19,7 @@ Foreword:
     I'm trying to observe standards of code writing on Python(PEP8)
 
 Usage:
-    python3 src/main.py count_of_images [-D]
-    count_of_images             number of images to download 
-    -D, --delete-images         to don't delete images in folder
-
-    Example:
-        python3 src/main.py 5 -D (images in folder will not be deleted)
-        python3 src/main.py 5 (images in folder will delete)
+    See in README file
 
 Functions:
     create_img_folder_if_not_exist()
@@ -38,7 +32,7 @@ import os
 import sys
 import argparse
 
-from download_images import ScrabImgFromLightShot
+from scrab_img_from_lightshot import ScrabImgFromLightShot
 
 
 def create_img_folder_if_not_exist():
@@ -107,7 +101,10 @@ def main(number_of_images, debug_mod=False):
 if __name__ == "__main__":
     start_program_time = time.time()
 
-    cli_parser = argparse.ArgumentParser(prog="(Some text)")
+    cli_parser = argparse.ArgumentParser(
+        prog="silf",
+        description="This program download images from ligthshot's site"
+    )
     cli_parser.add_argument(
         "count_of_images",
         help="Just print hello world",
@@ -116,6 +113,7 @@ if __name__ == "__main__":
     cli_parser.add_argument(
         "-D", "--delete_images",
         action="store_false",
+        help="to don't delete images in folder",
         default=True
     )
     cli_args = cli_parser.parse_args()
