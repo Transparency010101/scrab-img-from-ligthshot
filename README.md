@@ -53,25 +53,27 @@ That command will install needed libraries.
 
 
 ## Usage
-To launch program: 
+See more in help: `python3 src/main.py -h`
+
+### Launch program:
+
+Python:
 ```
-python src/main.py
+python3 src/main.py 10 
 ```
-or
+
 ```
-pyton3 src/main.py
+python3 src/main.py 3 -D
 ```
 
 Poetry:
 ```
-poetry run python src/main.py
+poetry run python3 src/main.py 7 
 ```
 or
 ```
-poetry run python3 src/main.py
+poetry run python3 src/main.py 2 -D
 ```
-
-You'll see a prompt: input there a count of images which you want to download.
 When program finished, open the project's folder `scrab-img-from-lightshot/img/`, and there will be images.
 
 ## Notes
