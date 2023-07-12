@@ -82,12 +82,10 @@ def main(number_of_images, debug_mod=False):
         None
     """
 
-    # When this code(in while loop) executing, sometimes errors occur due to
-    # the lack of a link, or it could not be obtained, and so that the program
-    # does not stop - an endless loop wrapped in try/except, which absorbs all
-    # errors, and ignores them. But there's a nuance - bugs(that I accidentally
-    # made while developing) are not shown due to try/catch, so there is
-    # debug_mod in function 'main'.
+    # While this code executing, sometimes errors occur and that stop program
+    # that's why code wrapped in try/except, but there is nuance, bugs that I
+    # accidentally made while developing, are not shown, so there is debug mod
+    # in function
     while number_of_images != len(os.listdir("img/")):
         try:
             ScrabImgFromLightShot.download_img()
