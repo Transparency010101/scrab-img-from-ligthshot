@@ -19,10 +19,13 @@ Foreword:
     I'm trying to observe standards of code writing on Python(PEP8)
 
 Usage:
-    python src/main.py <number> [, -y, -n]
-    <number> - number of images
-    [, -y, -n] - Option arguments. Do you want to delete all images from folder
-        -y - yes, -n - no
+    python3 src/main.py count_of_images [-D]
+    count_of_images             number of images to download 
+    -D, --delete-images         to don't delete images in folder
+
+    Example:
+        python3 src/main.py 5 -D (images in folder will not be deleted)
+        python3 src/main.py 5 (images in folder will delete)
 
 Functions:
     create_img_folder_if_not_exist()
@@ -33,6 +36,7 @@ Functions:
 import time
 import os
 import sys
+import argparse
 
 from download_images import ScrabImgFromLightShot
 
@@ -50,21 +54,24 @@ def create_img_folder_if_not_exist():
         os.makedirs(os.path.dirname("img/"))
 
 
-def delete_all_images(choise="-y"):
+def delete_all_images(to_delete):
     """Delete all images from folder img/
 
     It did it for convince, to don't delete it manually. There are 2 choices to
     delete it, or not, for convince.
 
+    Arguments:
+        to_delete (bool): to delete images from folder img/
+
     Returns:
         None
     """
     if len(os.listdir("img/")) != 0:
-        if choise == "-y":
+        if to_delete:
             for folder, _, files in os.walk("img/"):
                 for file in files:
                     os.remove(folder + file)
-        elif choise == "-n":
+        elif not to_delete:
             pass
         else:
             print("Incorrect input, try again")
@@ -100,19 +107,21 @@ def main(number_of_images, debug_mod=False):
 if __name__ == "__main__":
     start_program_time = time.time()
 
-    create_img_folder_if_not_exist()
+    cli_parser = argparse.ArgumentParser(prog="(Some text)")
+    cli_parser.add_argument(
+        "count_of_images",
+        help="Just print hello world",
+        type=int
+    )
+    cli_parser.add_argument(
+        "-D", "--delete_images",
+        action="store_false",
+        default=True
+    )
+    cli_args = cli_parser.parse_args()
 
-    arguments_of_command_line = sys.argv
-    try:
-        # This is optional argument -y or -n
-        # I don't know to do it right, so if you clearly didn't indicate
-        # it(in console) will be an IndexError, and then func will work with
-        # argument by default(-y).
-        delete_all_images(arguments_of_command_line[2])
-        main(int(int(arguments_of_command_line[1])))
-    except IndexError:
-        delete_all_images()
-    finally:
-        main(int(int(arguments_of_command_line[1])))
+    create_img_folder_if_not_exist()
+    delete_all_images(cli_args.delete_images)
+    main(cli_args.count_of_images)
 
     print(f"All time: {int(time.time() - start_program_time)}")
