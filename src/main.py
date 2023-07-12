@@ -19,37 +19,53 @@ Foreword:
     I'm trying to observe standards of code writing on Python(PEP8)
 
 Usage:
-    python ./src/main.py or python3 ./src/main.py
+    See in README file
 
 Functions:
-    do_delete_all_images
+    create_img_folder_if_not_exist()
+    delete_all_images
     main
 """
 
 import time
 import os
+import sys
+import argparse
 
-from core import ScrabImgFromLightShot
+from scrab_img_from_lightshot import ScrabImgFromLightShot
 
 
-def do_delete_all_images():
+def create_img_folder_if_not_exist():
+    """Create folder img/ if it doesn't exist.
+
+    If folder img/ doesn't exist will be an error, so need to check this every
+    time when program starts.
+
+    Returns:
+        None
+    """
+    if not os.path.exists("img/"):
+        os.makedirs(os.path.dirname("img/"))
+
+
+def delete_all_images(to_delete):
     """Delete all images from folder img/
 
     It did it for convince, to don't delete it manually. There are 2 choices to
     delete it, or not, for convince.
 
+    Arguments:
+        to_delete (bool): to delete images from folder img/
+
     Returns:
         None
     """
     if len(os.listdir("img/")) != 0:
-        permission_for_delete_images = input(
-            "Do you want delete all images from folder, (y - yes, n - no) "
-        )
-        if permission_for_delete_images == "y":
+        if to_delete:
             for folder, _, files in os.walk("img/"):
                 for file in files:
                     os.remove(folder + file)
-        elif permission_for_delete_images == "n":
+        elif not to_delete:
             pass
         else:
             print("Incorrect input, try again")
@@ -65,13 +81,13 @@ def main(number_of_images, debug_mod=False):
     Returns:
         None
     """
-    do_delete_all_images()
 
-    start_program_time = time.time()
-    # While this code executing, sometimes errors occur and that stop program
-    # that's why code wrapped in try/except, but there is nuance, bugs that I
-    # accidentally made while developing, are not shown, so there is debug mod
-    # in function
+    # When this code(in while loop) executing, sometimes errors occur due to
+    # the lack of a link, or it could not be obtained, and so that the program
+    # does not stop - an endless loop wrapped in try/except, which absorbs all
+    # errors, and ignores them. But there's a nuance - bugs(that I accidentally
+    # made while developing) are not shown due to try/catch, so there is
+    # debug_mod in function 'main'.
     while number_of_images != len(os.listdir("img/")):
         try:
             ScrabImgFromLightShot.download_img()
@@ -81,20 +97,29 @@ def main(number_of_images, debug_mod=False):
                 print(error)
             pass
 
-    print(f"All time: {int(time.time() - start_program_time)}")
-
 
 if __name__ == "__main__":
-    number_of_images = int(input("How many images to download(default=10): ")
-                           or 10)
-    # May occur, that folder img/ doesn't exist, and will be an error.
-    try:
-        main(int(number_of_images))
-    except FileNotFoundError:
-        # If you work in pycharm or another code editor/IDE, check the
-        # "working directory"(in Configuration, where Running the scripts)
-        # there must be root name of this project, not folder src or else.
-        # Folder img must be in root directory.
-        os.mkdir("img")
-        main(int(number_of_images))
+    start_program_time = time.time()
 
+    cli_parser = argparse.ArgumentParser(
+        prog="silf",
+        description="This program download images from ligthshot's site"
+    )
+    cli_parser.add_argument(
+        "count_of_images",
+        help="Just print hello world",
+        type=int
+    )
+    cli_parser.add_argument(
+        "-D", "--delete_images",
+        action="store_false",
+        help="to don't delete images in folder",
+        default=True
+    )
+    cli_args = cli_parser.parse_args()
+
+    create_img_folder_if_not_exist()
+    delete_all_images(cli_args.delete_images)
+    main(cli_args.count_of_images)
+
+    print(f"All time: {int(time.time() - start_program_time)}")

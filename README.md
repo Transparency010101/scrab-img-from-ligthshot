@@ -53,24 +53,35 @@ That command will install needed libraries.
 
 
 ## Usage
-To launch program: 
+See more in help: `python3 src/main.py -h`
+
+### Launch program:
+
+Python:
 ```
-python core/main.py
+python3 src/main.py 10 
 ```
-or
+
 ```
-pyton3 core/main.py
+python3 src/main.py 3 -D
 ```
 
 Poetry:
 ```
-poetry run python core/main.py
+poetry run python3 src/main.py 7 
 ```
-
-You'll see a prompt: input there a count of images which you want to download.
+or
+```
+poetry run python3 src/main.py 2 -D
+```
 When program finished, open the project's folder `scrab-img-from-lightshot/img/`, and there will be images.
 
 ## Notes
 Idea for the project I got [there](https://www.youtube.com/watch?v=OUki27mlwOw) 4:30.
 
+I'm developing this project only for my practise, maybe there is fools ideas,
+controversial points regarding the development, not serious thing, attitude towards whole development
+
 P.S. Не бейте за англиский.
+
+
