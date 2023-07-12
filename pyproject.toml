@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "scrab-img-from-ligthshot"
-version = "2.0.5"
+version = "2.1.0"
 description = "scrab images from ligthshot (i don't know is this legal)"
 authors = ["ossys <ossys1010110@gmail.com>"]
 readme = "README.md"
