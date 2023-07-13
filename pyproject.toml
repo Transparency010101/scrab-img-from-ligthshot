@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "scrab-img-from-ligthshot"
+name = "scrab_img_from_ligthshot"
 version = "2.1.0"
 description = "scrab images from ligthshot (i don't know is this legal)"
 authors = ["ossys <ossys1010110@gmail.com>"]
@@ -14,6 +14,8 @@ beautifulsoup4 = "^4.12.2"
 lxml = "^4.9.2"
 argparse = "^1.4.0"
 
+[tool.setuptools]
+py-modules = ["requests", "argparse", "bs4", "fake-useragent", "lxml"]
 
 [build-system]
 requires = ["poetry-core"]
