@@ -1,4 +1,5 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/poetry)
+![PyPI](https://img.shields.io/pypi/v/scrab-img-from-ligthshot)
 ![Static Badge](https://img.shields.io/badge/poetry-1.4%2B-green)
 ![Static Badge](https://img.shields.io/badge/only_linux_support-green)
 ![Static Badge](https://img.shields.io/badge/pass_tests-none-red)
