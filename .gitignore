@@ -4,5 +4,5 @@ silf/__pycache__/
 .idea/
 .ideas.txt.kate-swp
 subprocess
-dist/*.*
+dist/
 __pycache__/

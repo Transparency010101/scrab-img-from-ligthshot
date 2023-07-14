@@ -22,8 +22,9 @@ Usage:
     See in README file
 
 Functions:
-    create_img_folder_if_not_exist()
+    create_img_folder_if_not_exist
     delete_all_images
+    start_downloading
     main
 """
 
@@ -82,7 +83,6 @@ def start_downloading(number_of_images, debug_mod=False):
     Returns:
         None
     """
-
     # While this code executing, sometimes errors occur and that stop program
     # that's why code wrapped in try/except, but there is nuance, bugs that I
     # accidentally made while developing, are not shown, so there is debug mod
@@ -98,6 +98,7 @@ def start_downloading(number_of_images, debug_mod=False):
 
 
 def main():
+    """Enter point in program"""
     start_program_time = time.time()
 
     cli_args = cli()
