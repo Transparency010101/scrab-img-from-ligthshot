@@ -30,11 +30,9 @@ Functions:
 
 import time
 import os
-import sys
 
-
-from silf.scrab_img_from_lightshot import ScrabImgFromLightShot
-from silf.cli import cli
+from .scrab_img_from_lightshot import ScrabImgFromLightShot
+from .cli import cli
 
 
 def create_img_folder_if_not_exist():

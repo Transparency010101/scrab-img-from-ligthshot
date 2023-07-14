@@ -1,8 +1,13 @@
-img/
 venv/
-silf/__pycache__/
+env/
+src/silf/__pycache__/
+src/silf.egg-info/
+img/*.*
 .idea/
 .ideas.txt.kate-swp
 subprocess
 dist/
 __pycache__/
+scrab_img_from_ligthshot.egg-info/
+build/
+silf.egg-info/

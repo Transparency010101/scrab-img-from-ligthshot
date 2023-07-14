@@ -20,7 +20,7 @@ ___
 ### Poetry
 You have to have installed poetry 1.4 or higher.
 
-Spawn virtual enviroment:
+Spawn virtual environment:
 ```
 poetry shell 
 ```
@@ -35,15 +35,16 @@ You have to have installed python 3.7 or higher.
 
 Create virtual environment: 
 ```
-python3 -m venv venv 
+python3 -m venv env 
 ```
 
 Then activate(launch) virtual environment: 
-- **Linux**: `source venv/bin/activate`
+- **Linux**: `source env/bin/activate`
 
 ```
-pip install scrab-img-from-ligthshot
+pip3 install scrab-img-from-ligthshot
 ```
+
 
 ### Source
 Clone repository:
@@ -57,14 +58,18 @@ cd scrab-img-from-ligthshot/
 
 Create virtual environment: 
 ```
-python3 -m venv venv 
+python3 -m venv env 
 ```
 
 Then activate(launch) virtual environment: 
-- **Linux**: `source venv/bin/activate`
+- **Linux**: `source env/bin/activate`
 
 ```
 python3 setup.py install
+```
+If occurred permision denied error:
+```
+sudo python3 setup.py install
 ```
 ## Usage
 

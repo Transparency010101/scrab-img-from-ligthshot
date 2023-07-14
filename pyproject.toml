@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "scrab_img_from_ligthshot"
-version = "2.1.0"
+version = "2.2.0"
 description = "scrab images from ligthshot (i don't know is this legal)"
 authors = ["ossys <ossys1010110@gmail.com>"]
 readme = "README.md"
 packages = [
-    {include = "silf/*.py"}
+    {include = "silf", from = "src"}
 ]
 
 [tool.poetry.dependencies]
@@ -17,7 +17,7 @@ lxml = "^4.9.2"
 argparse = "^1.4.0"
 
 [tool.poetry.scripts]
-silf = 'silf:main'
+silf = "silf:main"
 
 [build-system]
 requires = ["poetry-core"]
