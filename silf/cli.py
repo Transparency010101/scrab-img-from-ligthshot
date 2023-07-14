@@ -1,3 +1,6 @@
+import argparse
+
+
 def cli():
     cli_parser = argparse.ArgumentParser(
         prog="silf",
