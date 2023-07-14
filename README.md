@@ -17,64 +17,72 @@ ___
 
 ## Installing
 
-### With Poetry
+### Poetry
 You have to have installed poetry 1.4 or higher.
 
-Install packages:
+Spawn virtual environment:
+```
+poetry shell 
+```
+
+Install requirements
 ```
 poetry install
 ```
 
-Activate virtual environment:
-```
-poetry shell
-```
-
-### With Pip
+### PyPi
 You have to have installed python 3.7 or higher. 
 
 Create virtual environment: 
 ```
-python -m venv venv 
-```
-If didn't work:
-```
-python3 -m venv venv 
+python3 -m venv env 
 ```
 
-Then activate(launch) virtual environmen: 
-- **Linux**: `source venv/bin/activate`
+Then activate(launch) virtual environment: 
+- **Linux**: `source env/bin/activate`
 
-Then launch this command in the ***root***(scrab-img-from-lightshot/) project's folder:
 ```
-pip install -r requirements.txt
+pip3 install scrab-img-from-ligthshot
 ```
-That command will install needed libraries.
 
 
+### Source
+Clone repository:
+```
+git clone git@github.com:Transparency010101/scrab-img-from-ligthshot.git
+```
+
+```
+cd scrab-img-from-ligthshot/
+```
+
+Create virtual environment: 
+```
+python3 -m venv env 
+```
+
+Then activate(launch) virtual environment: 
+- **Linux**: `source env/bin/activate`
+
+```
+python3 setup.py install
+```
+If occurred permision denied error:
+```
+sudo python3 setup.py install
+```
 ## Usage
-See more in help: `python3 src/main.py -h`
 
-### Launch program:
-
-Python:
+PyPi or Source:
 ```
-python3 src/main.py 10 
-```
-
-```
-python3 src/main.py 3 -D
+silf -h
 ```
 
 Poetry:
 ```
-poetry run python3 src/main.py 7 
+poetry run silf -h
 ```
-or
-```
-poetry run python3 src/main.py 2 -D
-```
-When program finished, open the project's folder `scrab-img-from-lightshot/img/`, and there will be images.
+When program finished, open the project's folder `img/`, and there will be images.
 
 ## Notes
 Idea for the project I got [there](https://www.youtube.com/watch?v=OUki27mlwOw) 4:30.
@@ -83,5 +91,3 @@ I'm developing this project only for my practise, maybe there is fools ideas,
 controversial points regarding the development, not serious thing, attitude towards whole development
 
 P.S. Не бейте за англиский.
-
-

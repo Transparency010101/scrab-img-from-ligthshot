@@ -22,17 +22,17 @@ Usage:
     See in README file
 
 Functions:
-    create_img_folder_if_not_exist()
+    create_img_folder_if_not_exist
     delete_all_images
+    start_downloading
     main
 """
 
 import time
 import os
-import sys
-import argparse
 
-from scrab_img_from_lightshot import ScrabImgFromLightShot
+from .scrab_img_from_lightshot import ScrabImgFromLightShot
+from .cli import cli
 
 
 def create_img_folder_if_not_exist():
@@ -71,8 +71,8 @@ def delete_all_images(to_delete):
             print("Incorrect input, try again")
 
 
-def main(number_of_images, debug_mod=False):
-    """Enter point in program.
+def start_downloading(number_of_images, debug_mod=False):
+    """Start downloading images
 
     Arguments:
         number_of_images (int): number of images, that need to download
@@ -81,7 +81,6 @@ def main(number_of_images, debug_mod=False):
     Returns:
         None
     """
-
     # While this code executing, sometimes errors occur and that stop program
     # that's why code wrapped in try/except, but there is nuance, bugs that I
     # accidentally made while developing, are not shown, so there is debug mod
@@ -96,28 +95,13 @@ def main(number_of_images, debug_mod=False):
             pass
 
 
-if __name__ == "__main__":
+def main():
+    """Enter point in program"""
     start_program_time = time.time()
 
-    cli_parser = argparse.ArgumentParser(
-        prog="silf",
-        description="This program download images from ligthshot's site"
-    )
-    cli_parser.add_argument(
-        "count_of_images",
-        help="Just print hello world",
-        type=int
-    )
-    cli_parser.add_argument(
-        "-D", "--delete_images",
-        action="store_false",
-        help="to don't delete images in folder",
-        default=True
-    )
-    cli_args = cli_parser.parse_args()
-
+    cli_args = cli()
     create_img_folder_if_not_exist()
     delete_all_images(cli_args.delete_images)
-    main(cli_args.count_of_images)
+    start_downloading(cli_args.count_of_images)
 
     print(f"All time: {int(time.time() - start_program_time)}")
