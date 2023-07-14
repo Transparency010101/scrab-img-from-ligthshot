@@ -1,10 +1,15 @@
 [tool.poetry]
 name = "scrab-img-from-ligthshot"
 version = "2.1.1"
-description = "scrab images from ligthshot (i don't know is this legal)"
+description = "download images from ligthshot's site"
+license = "Apache-2.0"
 authors = ["ossys <ossys1010110@gmail.com>"]
 readme = "README.md"
-packages = [{include = "scrab_img_from_ligthshot"}]
+repository = "https://github.com/Transparency010101/scrab-img-from-ligthshot"
+keywords = ["scrab", "ligthshot"]
+packages = [
+    {include = "scrab-img-from-ligthshot"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -13,7 +18,6 @@ fake-useragent = "^1.1.3"
 beautifulsoup4 = "^4.12.2"
 lxml = "^4.9.2"
 argparse = "^1.4.0"
-
 
 [build-system]
 requires = ["poetry-core"]
