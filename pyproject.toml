@@ -9,6 +9,7 @@ repository = "https://github.com/Transparency010101/scrab-img-from-ligthshot"
 packages = [
     {include = "silf", from = "src"}
 ]
+exclude = ["src/run.py"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
