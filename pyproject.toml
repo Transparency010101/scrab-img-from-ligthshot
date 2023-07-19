@@ -21,6 +21,7 @@ argparse = "^1.4.0"
 
 [tool.poetry.scripts]
 silf = "silf:main"
+run_test = "python3 -m unittest src/tests/test.py" # This command doesn't work
 
 [build-system]
 requires = ["poetry-core"]

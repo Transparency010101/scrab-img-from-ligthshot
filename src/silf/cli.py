@@ -31,9 +31,12 @@ def cli():
     Returns:
         Namespace
     """
+    description = """
+    This program download images from ligthshot's site. See more in README file
+    """
     cli_parser = argparse.ArgumentParser(
         prog="silf",
-        description="This program download images from ligthshot's site. See more in README file"
+        description=description
     )
     cli_parser.add_argument(
         "count_of_images",

@@ -28,8 +28,12 @@ Functions:
 import time
 import os
 
-from src.silf.scrab_img_from_lightshot import ScrabImgFromLightShot
-from src.silf.cli import cli
+from .cli import cli
+from .ect import (
+    create_img_folder_if_not_exist,
+    delete_all_images,
+    start_downloading
+)
 
 
 def main():

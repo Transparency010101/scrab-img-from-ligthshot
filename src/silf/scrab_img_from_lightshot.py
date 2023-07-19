@@ -29,6 +29,8 @@ import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
+PATH_TO_FOLDER_IMG = "img/"
+
 
 class ScrabImgFromLightShot:
     """Downloading images from Lightshot
@@ -124,7 +126,7 @@ class ScrabImgFromLightShot:
         # but "if" statement will not execute, because value isn't True,
         # so it toggled from False to True by operator "not"
         if not (cls.is_img_broken(request_url_of_img.content)):
-            img_name = f"img/img_{cls.create_random_name_for_img()}" + ".jpg"
+            img_name = f"{PATH_TO_FOLDER_IMG}/img_{cls.create_random_name_for_img()}" + ".jpg"
 
             with open(img_name, "wb") as img:
                 img.write(request_url_of_img.content)
