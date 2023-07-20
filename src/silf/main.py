@@ -22,7 +22,7 @@ Usage:
     See in README file
 
 Functions:
-    main
+    main()
 """
 
 import time
@@ -31,7 +31,7 @@ import os
 from .cli import cli
 from .ect import (
     create_img_folder_if_not_exist,
-    delete_all_images,
+    do_delete_all_images,
     start_downloading
 )
 
@@ -42,7 +42,7 @@ def main():
 
     cli_args = cli()
     create_img_folder_if_not_exist()
-    delete_all_images(cli_args.delete_images)
+    do_delete_all_images(cli_args.delete_images)
     start_downloading(cli_args.count_of_images)
 
     print(f"All time: {int(time.time() - start_program_time)}")

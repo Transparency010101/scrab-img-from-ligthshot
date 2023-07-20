@@ -19,7 +19,7 @@ Foreword:
     I'm trying to observe standards of code writing on Python(PEP8)
 
 Functions:
-    cli
+    cli()
 """
 
 import argparse
