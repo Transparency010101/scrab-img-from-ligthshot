@@ -18,6 +18,9 @@ Licence:
 Foreword:
     I trying to observe standard code writing on python(PEP8)
 
+Usage:
+    ScrabImgFromLightShot.start_downloading_images(3)
+
 Classes:
     ScrabImgFromLightShot
 """
@@ -25,6 +28,7 @@ Classes:
 import string
 import random
 import requests
+import os
 
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
@@ -33,7 +37,7 @@ PATH_TO_FOLDER_IMG = "img/"
 
 
 class ScrabImgFromLightShot:
-    """Downloading images from Lightshot
+    """Downloading images from Lightshot's site
     
     Attributes:
         header (dict): for browser to think that I'm not a robot
@@ -53,7 +57,7 @@ class ScrabImgFromLightShot:
         See on top of README file, there is example(in paragraph 'What Is It?')
 
         Returns:
-            string
+            str
         """
         lower_case = string.ascii_lowercase
         numbers = string.digits
@@ -67,7 +71,7 @@ class ScrabImgFromLightShot:
         """Create random name for downloaded image
         
         Returns:
-            string
+            str
         """
         lower_case = string.ascii_lowercase
         upper_case = string.ascii_uppercase
@@ -130,3 +134,21 @@ class ScrabImgFromLightShot:
 
             with open(img_name, "wb") as img:
                 img.write(request_url_of_img.content)
+
+    @classmethod
+    def start_downloading_images(cls, number_of_images):
+        """Launch downloading images
+
+        Arguments:
+            number_of_images (int): number of images to download
+
+        Returns:
+            None
+        """
+        # If link is broken, will throw an AttributeError, but script will
+        # continue executing
+        while number_of_images != len(os.listdir(PATH_TO_FOLDER_IMG)):
+            try:
+                cls.download_img()
+            except AttributeError:
+                pass

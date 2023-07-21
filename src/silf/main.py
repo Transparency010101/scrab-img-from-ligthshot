@@ -1,4 +1,4 @@
-"""Download images from Lightshot's site
+"""This file is center of whole programm
 
 License:
     Copyright 2023 Transparency010101
@@ -29,10 +29,10 @@ import time
 import os
 
 from .cli import cli
+from .scrab_img_from_lightshot import ScrabImgFromLightShot as silf
 from .ect import (
     create_img_folder_if_not_exist,
     do_delete_all_images,
-    start_downloading
 )
 
 
@@ -43,6 +43,6 @@ def main():
     cli_args = cli()
     create_img_folder_if_not_exist()
     do_delete_all_images(cli_args.delete_images)
-    start_downloading(cli_args.count_of_images)
+    silf.start_downloading_images(cli_args.count_of_images)
 
     print(f"All time: {int(time.time() - start_program_time)}")

@@ -1,4 +1,4 @@
-"""This module provide only CLI interface
+"""This module contain necessary functions for good working, or convince
 
 License:
     Copyright 2023 Transparency010101
@@ -21,7 +21,6 @@ Foreword:
 Functions:
     create_img_folder_if_not_exist()
     delete_all_images()
-    start_downloading()
 """
 
 import os
@@ -50,7 +49,7 @@ def do_delete_all_images(to_delete):
 
     It did it for convince, to don't delete it manually. There are 2 choices to
     delete it, or not, for convince. And it's option, if folder img/ contain
-    some images
+    some images.
 
     Arguments:
         to_delete (bool): to delete images from folder img/
@@ -67,27 +66,3 @@ def do_delete_all_images(to_delete):
             pass
         else:
             print("Incorrect input, try again")
-
-
-def start_downloading(number_of_images, debug_mod=True):
-    """Start downloading images
-
-    Arguments:
-        number_of_images (int): number of images, that need to download
-        debug_mod (bool): turn on/off debug mod
-
-    Returns:
-        None
-    """
-    # While this code executing, sometimes errors occur and that stop program
-    # that's why code wrapped in try/except, but there is nuance, bugs that I
-    # accidentally made while developing, are not shown, so there is debug mod
-    # in function
-    while number_of_images != len(os.listdir(PATH_TO_FOLDER_IMG)):
-        try:
-            ScrabImgFromLightShot.download_img()
-        except Exception as error:
-            if debug_mod:
-                print("SOMETHING WENT WRONG!:")
-                print(error)
-            pass
