@@ -136,19 +136,31 @@ class ScrabImgFromLightShot:
                 img.write(request_url_of_img.content)
 
     @classmethod
-    def start_downloading_images(cls, number_of_images):
+    def start_downloading_images(cls, number_of_images, debug_mod=True):
         """Launch downloading images
 
         Arguments:
             number_of_images (int): number of images to download
+            debug_mod (bool): turn on/off showing errors
 
         Returns:
             None
         """
         # If link is broken, will throw an AttributeError, but script will
         # continue executing
+        count_of_error_AttributeError = 0
+        count_of_error_MissingSchema = 0
         while number_of_images != len(os.listdir(PATH_TO_FOLDER_IMG)):
             try:
                 cls.download_img()
-            except AttributeError:
-                pass
+            except AttributeError as error:
+                count_of_error_AttributeError = count_of_error_AttributeError+1
+                if debug_mod:
+                    print(error)
+            except requests.exceptions.MissingSchema as error:
+                count_of_error_MissingSchema = count_of_error_MissingSchema+1
+                if debug_mod:
+                    print(error)
+        all_number = count_of_error_MissingSchema + count_of_error_AttributeError
+        if debug_mod:
+            print(f"Broken images, that didn't download: {all_number}")

@@ -1,4 +1,4 @@
-"""This module provide only CLI interface
+"""File where all tests run
 
 License:
     Copyright 2023 Transparency010101
@@ -21,12 +21,11 @@ Foreword:
 Functions:
     delete_all_images_from_folder()
 """
+
 import unittest
 import os
 
-import src.silf.cli as cli
-import src.silf.ect as ect
-import src.silf.scrab_img_from_lightshot as silf
+from src.silf.scrab_img_from_lightshot import PATH_TO_FOLDER_IMG
 
 
 def delete_all_images_from_folder():
@@ -35,14 +34,13 @@ def delete_all_images_from_folder():
     Returns:
         None
     """
-    for folder, _, files in os.walk("img/"):
+    for folder, _, files in os.walk(PATH_TO_FOLDER_IMG):
         for file in files:
             os.remove(folder + file)
 
 
-class ScrabImgFromLightshot(unittest.TestCase):
-    def test_download_1_image(self):
-        delete_all_images_from_folder()
-        silf.ScrabImgFromLightShot.download_img()
-        self.assertEqual(len(os.listdir("img/")), 1)
-        delete_all_images_from_folder()
+test_loader = unittest.TestLoader()
+test_suite = test_loader.discover('src/tests', pattern='test_*.py')
+
+test_runner = unittest.TextTestRunner()
+test_runner.run(test_suite)
