@@ -37,10 +37,7 @@ def delete_all_images_from_folder():
             os.remove(folder + file)
 
 
-if __name__ == "__main__":
-    # Run all tests
-    test_loader = unittest.TestLoader()
-    test_suite = test_loader.discover('src/tests', pattern='test_*.py')
-    test_runner = unittest.TextTestRunner()
-    test_runner.run(test_suite)
-
+test_loader = unittest.TestLoader()
+test_suite = test_loader.discover('src/tests', pattern='test_*.py')
+test_runner = unittest.TextTestRunner()
+test_runner.run(test_suite)
