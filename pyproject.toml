@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "scrab_img_from_ligthshot"
-version = "2.2.0"
+version = "2.3.0"
 description = "scrab images from ligthshot (i don't know is this legal)"
 license = "Apache-2.0"
 authors = ["ossys <ossys1010110@gmail.com>"]
