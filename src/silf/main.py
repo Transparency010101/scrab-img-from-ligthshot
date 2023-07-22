@@ -19,10 +19,12 @@ Foreword:
     I'm trying to observe standards of code writing on Python(PEP8)
 
 Usage:
-    See in README file
+    >>> python3 src/main -h
+    >>> poetry run silf -h
+    >>> silf -h
 
 Functions:
-    main()
+    main: Enter point in program
 """
 
 import time

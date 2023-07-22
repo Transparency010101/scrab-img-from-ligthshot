@@ -1,4 +1,4 @@
-"""This module provide only CLI interface
+"""This module provide CLI interface
 
 License:
     Copyright 2023 Transparency010101
@@ -19,7 +19,7 @@ Foreword:
     I'm trying to observe standards of code writing on Python(PEP8)
 
 Functions:
-    cli()
+    cli: CLI interface
 """
 
 import argparse

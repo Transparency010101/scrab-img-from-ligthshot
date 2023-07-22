@@ -19,8 +19,8 @@ Foreword:
     I'm trying to observe standards of code writing on Python(PEP8)
 
 Functions:
-    create_img_folder_if_not_exist()
-    delete_all_images()
+    create_img_folder_if_not_exist: Create folder img/ if it doesn't exist.
+    delete_all_images: Delete all images from folder img/
 """
 
 import os

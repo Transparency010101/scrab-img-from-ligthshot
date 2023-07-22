@@ -19,10 +19,10 @@ Foreword:
     I trying to observe standard code writing on python(PEP8)
 
 Usage:
-    ScrabImgFromLightShot.start_downloading_images(3)
+    >>> ScrabImgFromLightShot.start_downloading_images(3)
 
 Classes:
-    ScrabImgFromLightShot
+    ScrabImgFromLightShot: Downloading images from Lightshot's site
 """
 
 import string

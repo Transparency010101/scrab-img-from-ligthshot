@@ -15,11 +15,9 @@ License:
     See the License for the specific language governing permissions and
     limitations under the License.
 
-Foreword:
-    I'm trying to observe standards of code writing on Python(PEP8)
 
 Functions:
-    delete_all_images_from_folder()
+    delete_all_images_from_folder: Delete images from folder img/
 """
 
 import unittest
@@ -39,8 +37,10 @@ def delete_all_images_from_folder():
             os.remove(folder + file)
 
 
-test_loader = unittest.TestLoader()
-test_suite = test_loader.discover('src/tests', pattern='test_*.py')
+if __name__ == "__main__":
+    # Run all tests
+    test_loader = unittest.TestLoader()
+    test_suite = test_loader.discover('src/tests', pattern='test_*.py')
+    test_runner = unittest.TextTestRunner()
+    test_runner.run(test_suite)
 
-test_runner = unittest.TextTestRunner()
-test_runner.run(test_suite)
