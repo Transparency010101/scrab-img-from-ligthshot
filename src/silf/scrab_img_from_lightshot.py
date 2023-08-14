@@ -146,8 +146,8 @@ class ScrabImgFromLightShot:
         Returns:
             None
         """
-        # If link is broken, will throw an AttributeError, but script will
-        # continue executing
+        # If link is broken, will throw an AttributeError or
+        # requests.exceptions.MissingSchema
         count_of_error_AttributeError = 0
         count_of_error_MissingSchema = 0
         while number_of_images != len(os.listdir(PATH_TO_FOLDER_IMG)):
